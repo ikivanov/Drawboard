@@ -37,10 +37,18 @@
     <Compile Include="public\controllers\registerCtrl.js" />
     <Compile Include="public\libs\angular-route.js" />
     <Compile Include="public\libs\angular.js" />
+    <Compile Include="public\libs\bootstrap.min.js" />
+    <Compile Include="public\libs\fabric.min.js" />
+    <Compile Include="public\libs\ui-bootstrap.min.js" />
+    <Compile Include="public\services\authenticationService.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
+    <Content Include="public\css\bootstrap-theme.min.css" />
+    <Content Include="public\css\bootstrap.css" />
+    <Content Include="public\css\bootstrap.css.map" />
+    <Content Include="public\css\styles.css" />
     <Content Include="public\index.html" />
     <Content Include="public\css\style.styl" />
     <Content Include="public\views\drawboard.html" />
@@ -57,6 +65,7 @@
     <Folder Include="public\controllers\" />
     <Folder Include="public\libs\" />
     <Folder Include="public\css\" />
+    <Folder Include="public\services\" />
     <Folder Include="public\views\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />

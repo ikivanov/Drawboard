@@ -1,4 +1,4 @@
-﻿var app = angular.module("DrawBox", ['ngRoute']);
+﻿var app = angular.module("DrawBox", ['ngRoute', 'ui.bootstrap']);
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider

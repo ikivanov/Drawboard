@@ -1,3 +1,39 @@
-﻿<div data-ng-controller="LoginController">
+﻿<div data-ng-controller="LoginController" data-ng-init="init()">
     <h1>Drawboard</h1>
+
+    <div class="row" style="background-color:lavender;">
+        <div class="col-md-1">
+        </div>
+        <div class="col-xs-11 col-sm-6 col-lg-8">
+            <button><<</button>
+            <button>>></button>
+        </div>
+    </div>
+    <div class="row" style="background-color:lavenderblush;">
+        <div class="col-md-1">
+            <fieldset>
+                <label>Select</label><input name="tool" type="radio"/>
+                <label>Line</label><input name="tool" type="radio" />
+                <label>Circle</label><input name="tool" type="radio" />
+                <label>Rect</label><input name="tool" type="radio" />
+            </fieldset>
+        </div>
+        <div class="col-md-9">
+            <canvas id="canvas"
+                    width="500" height="300"
+                    style="background-color:white;"
+                    ng-mousedown="onMouseDown($event)"
+                    ng-mouseup="onMouseUp($event)"
+                    ng-mousemove="onMouseMove($event)">
+            </canvas>
+        </div>
+        <div class="col-md-1">
+            <select multiple>
+                <option>me</option>
+                <option>User1</option>
+                <option>User2</option>
+                <option>User3</option>
+            </select>
+        </div>
+    </div> 
 </div>
