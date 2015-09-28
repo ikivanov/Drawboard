@@ -1,9 +1,9 @@
-﻿angular.module('DrawBox').service('AuthenticationService', function () {
+﻿angular.module('DrawBox').service('AuthenticationService', function (SocketService) {
     this.register = function (username, password, callback) {
-        alert("register");
+        SocketService.emit("register", { username: username, password: password }, callback);
     }
-
+        
     this.login = function (username, password, callback) {
-        alert("login");
+        SocketService.emit("login", { username: username, password: password }, callback);
     }
 });

@@ -57,5 +57,46 @@ app.use(function (err, req, res, next) {
     });
 });
 
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+server.listen("8080");
+
+var drawboardSchema = require('./schema.js').schema;
+
+io.on('connection', function (socket) {
+    socket.on("login", function (data, callback) {
+        var username = data.username;
+        var password = data.password;
+        
+        drawboardSchema.User.findOne({ username: username, password: password }, function (err, user) {
+            if (user) {
+                callback({ success: true, msg: "OK!" });
+            } else {
+                callback({ success: false, msg: "Wrong credentials!" });
+            }
+        }); 
+    });
+
+    socket.on("register", function (data, callback) {
+        var username = data.username;
+        var password = data.password;
+        
+        drawboardSchema.User.findOne({ username: username }, function (err, user) {
+            if (user) {
+                callback({ success: false, msg: "Username already in use!" });
+            } else {
+                var user = new drawboardSchema.User({ username: username, password: password });
+                user.save(function (err, document) {
+                    if (err) {
+                        callback({ success: false, msg: "An error occured while creating a new user!", err: err });
+                    } else {
+                        callback({ success: true, msg: "OK!" });
+                    }
+                });
+            }
+        });
+    });
+});
 
 module.exports = app;

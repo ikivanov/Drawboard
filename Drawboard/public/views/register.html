@@ -1,3 +1,8 @@
-﻿<div data-ng-controller="LoginController">
+﻿<div data-ng-controller="RegisterController">
     <h1>Register</h1>
+
+    Username <input type="text" data-ng-model="username" /> {{username}}
+    Password <input type="password" data-ng-model="password" /> {{password}}
+
+    <button data-ng-click="Register()" ng-disabled="!username || !password">Register</button>
 </div>

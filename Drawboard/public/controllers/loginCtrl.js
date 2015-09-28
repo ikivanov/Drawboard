@@ -1,10 +1,17 @@
-﻿angular.module('DrawBox').controller('LoginController', function ($scope, $location) {
+﻿angular.module('DrawBox').controller('LoginController', function ($scope, $location, AuthenticationService) {
     $scope.username = "";
     $scope.password = "";
 
-    $scope.Login = function () {
-        //alert("Username = " + $scope.username);
+    $scope.init = function () {
+    }
 
-        $location.path("/drawboard/123");
+    $scope.Login = function () {
+        AuthenticationService.login($scope.username, $scope.password, function (data) {
+            if (data.success) {
+                $location.path("/drawboard/123");
+            } else {
+                alert(data.msg);
+            }
+        });
     }
 });
