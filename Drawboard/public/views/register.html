@@ -1,8 +1,40 @@
-﻿<div data-ng-controller="RegisterController">
-    <h1>Register</h1>
+﻿<div class="container register-panel">
+    <div class="row">
+        <h3>Join Drawboard</h3>
+    </div>
 
-    Username <input type="text" data-ng-model="username" /> {{username}}
-    Password <input type="password" data-ng-model="password" /> {{password}}
+    <div class="row">
+        <span>Username</span>
+    </div>
 
-    <button data-ng-click="Register()" ng-disabled="!username || !password">Register</button>
+    <div class="row">
+        <input class="form-control" type="text" ng-model="username" />
+    </div>
+
+    <div class="row">
+        <span>Password</span>
+    </div>
+
+    <div class="row">
+        <input class="form-control" type="password" ng-model="password" />
+    </div>
+
+    <div class="row">
+        <span>Retype Password</span>
+    </div>
+
+    <div class="row">
+        <input class="form-control" type="password" ng-model="password2" />
+    </div>
+
+    <div class="row">
+        <button class="btn btn-primary form-control navbar-btn" ng-click="registerBtnClicked()" ng-disabled="!username || !password || !password2">Create an account</button>
+    </div>
 </div>
+
+<style>
+    .register-panel {
+        margin-top: 100px;
+        max-width: 300px;
+    }
+</style>

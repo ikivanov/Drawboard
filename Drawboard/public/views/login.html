@@ -1,8 +1,37 @@
-﻿<div data-ng-controller="LoginController">
-    <h1>Login</h1>
+﻿<div class="container login-panel">
+    <div class="row">
+        <h3>Login to Drawboard</h3>
+    </div>
 
-    Username <input type="text" data-ng-model="username" /> {{username}}
-    Password <input type="password" data-ng-model="password" /> {{password}}
+    <div class="row">
+        <span>Username</span>
+    </div>
 
-    <button data-ng-click="Login()" ng-disabled="!username || !password">Login</button>
+    <div class="row">
+        <input class="form-control" type="text" ng-model="username" />
+    </div>
+
+    <div class="row">
+        <span>Password</span>
+    </div>
+
+    <div class="row">
+        <input class="form-control" type="password" ng-model="password" />
+    </div>
+
+    <div class="row">
+        <button class="btn btn-primary form-control navbar-btn" ng-click="loginBtnClicked()" ng-disabled="!username || !password">Login</button>
+    </div>
+
+    <div>
+        <span>New to Drawboard?</span>
+        <a href="/#/register">Create an account</a>
+    </div>
 </div>
+
+<style>
+    .login-panel {
+        margin-top:100px;
+        max-width: 300px;
+    }
+</style>
