@@ -1,13 +1,16 @@
 ﻿(function() {
-    angular.module('DrawBox').controller('DrawboardController', function ($scope) {
+    angular.module('DrawBox').controller('DrawboardController', function ($scope, AddonService) {
         var canvas = null;
         var line = null;
         var mouseBtnPressed = false;
-        var ctx;;
+        var ctx;
+        $scope.drawingTools = {};
     
         $scope.init = function () {
             canvas = document.getElementById('canvas');
             ctx = canvas.getContext('2d');
+
+            $scope.drawingTools = AddonService.getAddons();
         }
 
         $scope.onMouseDown = function (ev) {

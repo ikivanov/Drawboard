@@ -32,6 +32,9 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="consts.js" />
+    <Compile Include="public\addons\circle.js" />
+    <Compile Include="public\addons\line.js" />
+    <Compile Include="public\addons\rectangle.js" />
     <Compile Include="public\app.js" />
     <Compile Include="public\controllers\drawboardCtrl.js" />
     <Compile Include="public\controllers\loginCtrl.js" />
@@ -42,8 +45,10 @@
     <Compile Include="public\libs\fabric.min.js" />
     <Compile Include="public\libs\socket.io.js" />
     <Compile Include="public\libs\ui-bootstrap.min.js" />
+    <Compile Include="public\services\addonService.js" />
     <Compile Include="public\services\authenticationService.js" />
     <Compile Include="public\services\socketService.js" />
+    <Compile Include="public\tasks\gulpfile.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -66,9 +71,11 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="public\" />
+    <Folder Include="public\addons\" />
     <Folder Include="public\controllers\" />
     <Folder Include="public\libs\" />
     <Folder Include="public\css\" />
+    <Folder Include="public\tasks\" />
     <Folder Include="public\services\" />
     <Folder Include="public\views\" />
     <Folder Include="routes\" />

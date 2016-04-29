@@ -8,16 +8,15 @@
     </div>
 
     <div class="row drawboard-container">
-        <div class="col-md-1">
-            <fieldset>
-                <label>Select</label><input name="tool" type="radio" />
-                <label>Line</label><input name="tool" type="radio" />
-                <label>Circle</label><input name="tool" type="radio" />
-                <label>Rect</label><input name="tool" type="radio" />
-            </fieldset>
+        <div class="col-md-2">
+            <ul ng-repeat="tool in drawingTools" style="list-style:none;">
+                <li>
+                    <label><input name="drawingTool" type="radio" />&nbsp;{{tool.title}}</label>
+                </li>
+            </ul>
         </div>
 
-        <div class="col-md-11">
+        <div class="col-md-10">
             <canvas id="canvas" class="drawboard-canvas"
                     ng-mousedown="onMouseDown($event)"
                     ng-mouseup="onMouseUp($event)"
