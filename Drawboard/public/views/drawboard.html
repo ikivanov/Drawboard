@@ -9,18 +9,28 @@
 
     <div class="row drawboard-container">
         <div class="col-md-2">
-            <ul ng-repeat="tool in drawingTools" style="list-style:none;">
+            <ul ng-repeat="tool in drawingTools | orderBy: ['displayOrder'] track by tool.name" style="list-style:none;">
                 <li>
-                    <label><input name="drawingTool" type="radio" />&nbsp;{{tool.title}}</label>
+                    <label><input name="drawingTool" type="radio" ng-model="currentTool" ng-change="onToolSelected(tool.name)" />&nbsp;{{tool.title}}</label>
                 </li>
             </ul>
         </div>
 
         <div class="col-md-10">
-            <canvas id="canvas" class="drawboard-canvas"
-                    ng-mousedown="onMouseDown($event)"
-                    ng-mouseup="onMouseUp($event)"
-                    ng-mousemove="onMouseMove($event)"></canvas>
+            <canvas id="canvas" 
+                    width="500"
+                    height="500"
+                    class="drawboard-canvas">
+            </canvas>
+
+            <canvas id="tempCanvas"
+                    class="temp-canvas"
+                    width="500"
+                    height="500"
+                    ng-mousedown="mouseHandler($event)"
+                    ng-mouseup="mouseHandler($event)"
+                    ng-mousemove="mouseHandler($event)">
+            </canvas>
         </div>
     </div>
 </div>
@@ -38,8 +48,13 @@
     }
 
     .drawboard-canvas {
-        max-width:100%;
-        height:75vh;
         background-color:white;
+        border: 1px solid #000; 
+    }
+
+    .temp-canvas {
+        position: absolute;
+        top: 1px;
+        left: 1px;
     }
 </style>

@@ -1,40 +1,39 @@
 ﻿(function() {
     angular.module('DrawBox').controller('DrawboardController', function ($scope, AddonService) {
-        var canvas = null;
-        var line = null;
+        var canvas, tempCanvas = null;
         var mouseBtnPressed = false;
-        var ctx;
         $scope.drawingTools = {};
+        $scope.currentTool = null;
     
         $scope.init = function () {
             canvas = document.getElementById('canvas');
-            ctx = canvas.getContext('2d');
+            tempCanvas = document.getElementById('tempCanvas');
 
-            $scope.drawingTools = AddonService.getAddons();
+            $scope.drawingTools = AddonService.getAddons(canvas, tempCanvas);
         }
-
-        $scope.onMouseDown = function (ev) {
-            var e = ev;
         
-            mouseBtnPressed = true;
-        
-            var x = ev.clientX - canvas.offsetParent.offsetLeft - canvas.offsetLeft;
-            var y = ev.clientY - canvas.offsetParent.offsetTop - canvas.offsetTop;
-        
-            ctx.strokeRect(x, y, 1, 1);
+        $scope.onToolSelected = function (toolName) {
+            $scope.currentTool = toolName;
         }
-
-        $scope.onMouseUp = function (ev){
-            mouseBtnPressed = false;
-        }
-
-        $scope.onMouseMove = function (ev) {
-            if (!mouseBtnPressed) return;
         
-            var x = ev.clientX - canvas.offsetParent.offsetLeft - canvas.offsetLeft;
-            var y = ev.clientY - canvas.offsetParent.offsetTop - canvas.offsetTop;
-        
-            ctx.strokeRect(x, y, 1, 1);
+        $scope.mouseHandler = function(ev) {
+            var tool = $scope.drawingTools[$scope.currentTool];
+
+            // Firefox
+            if (ev.layerX || ev.layerX == 0) {
+                ev._x = ev.layerX;
+                ev._y = ev.layerY;
+	        // Opera
+            } else if (ev.offsetX || ev.offsetX == 0) {
+                ev._x = ev.offsetX;
+                ev._y = ev.offsetY;
+            }
+            
+            // Call the event handler of the tool
+            var func = tool[ev.type];
+            if (func) {
+                func(ev);
+            }
         }
     });
 })();
