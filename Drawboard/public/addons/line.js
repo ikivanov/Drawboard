@@ -6,6 +6,7 @@
         this.title = 'Line';
         this.hint = 'Draw a line';
         this.displayOrder = 0;
+        this.isDefault = true;
         
         this.mouseBtnPressed = false;
         this.originX, this.originY;

@@ -6,6 +6,7 @@
         this.title = 'Rectangle';
         this.hint = 'Draw a rectangle';
         this.displayOrder = 1;
+        this.isDefault = false;
 
         this.mouseBtnPressed = false;
         this.originX, this.originY;
@@ -30,8 +31,6 @@
                 y = Math.min(event._y, that.originY),
                 w = Math.abs(event._x - that.originX),
                 h = Math.abs(event._y - that.originY);
-            
-            that.tempContext.clearRect(x, y, w, h);
             
             if (!w || !h) {
                 return;

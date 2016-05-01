@@ -11,7 +11,7 @@
         <div class="col-md-2">
             <ul ng-repeat="tool in drawingTools | orderBy: ['displayOrder'] track by tool.name" style="list-style:none;">
                 <li>
-                    <label><input name="drawingTool" type="radio" ng-model="currentTool" ng-change="onToolSelected(tool.name)" />&nbsp;{{tool.title}}</label>
+                    <label><input name="drawingTool" type="radio" ng-model="currentTool.name" value="{{tool.name}}" ng-change="onToolChanged(tool.name)"/>&nbsp;{{tool.title}}</label>
                 </li>
             </ul>
         </div>
@@ -55,6 +55,6 @@
     .temp-canvas {
         position: absolute;
         top: 1px;
-        left: 1px;
+        left: 15px;
     }
 </style>

@@ -3,21 +3,34 @@
         var canvas, tempCanvas = null;
         var mouseBtnPressed = false;
         $scope.drawingTools = {};
-        $scope.currentTool = null;
+        $scope.currentTool = {
+            name: '',
+            instance: null
+        };
+        $scope.currentTool;
     
         $scope.init = function () {
             canvas = document.getElementById('canvas');
             tempCanvas = document.getElementById('tempCanvas');
 
             $scope.drawingTools = AddonService.getAddons(canvas, tempCanvas);
+            var defaultTool = AddonService.getDefaultTool();
+            if (defaultTool) {
+                $scope.currentTool.instance = defaultTool;
+                $scope.currentTool.name = defaultTool.name
+            }
         }
         
-        $scope.onToolSelected = function (toolName) {
-            $scope.currentTool = toolName;
+        $scope.onToolChanged = function (name) {
+            $scope.currentTool.instance = $scope.drawingTools.find(function (tool) {
+                return tool.name === name;
+            });
         }
         
         $scope.mouseHandler = function(ev) {
-            var tool = $scope.drawingTools[$scope.currentTool];
+            if (!$scope.currentTool.instance) {
+                return;
+            }
 
             // Firefox
             if (ev.layerX || ev.layerX == 0) {
@@ -30,7 +43,7 @@
             }
             
             // Call the event handler of the tool
-            var func = tool[ev.type];
+            var func = $scope.currentTool.instance[ev.type];
             if (func) {
                 func(ev);
             }
