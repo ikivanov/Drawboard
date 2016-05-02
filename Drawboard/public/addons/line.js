@@ -1,7 +1,7 @@
 ﻿(function () {
     var app = angular.module("DrawBox");
     
-    var LineToolAddon = function () {
+    var LineToolAddon = function (CommandService) {
         this.name = 'lineTool';
         this.title = 'Line';
         this.hint = 'Draw a line';
@@ -25,13 +25,9 @@
                 return;
             }
             
-            that.tempContext.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+            that.tempContext.clearRect(0, 0, that.tempCanvas.width, that.tempCanvas.height);
             
-            that.tempContext.beginPath();
-            that.tempContext.moveTo(that.originX, that.originY);
-            that.tempContext.lineTo(event._x, event._y);
-            that.tempContext.stroke();
-            that.tempContext.closePath();
+            that.draw(that.tempContext, that.originX, that.originY, event._x, event._y);
         }
         
         this.mouseup = function (event) {
@@ -42,11 +38,40 @@
             that.mousemove(event);
             that.mouseBtnPressed = false;
 
+            CommandService.registerCommand(new LineCommand({
+                x1: that.originX,
+                y1: that.originY,
+                x2: event._x,
+                y2: event._y
+            }));
+
             that.context.drawImage(that.tempCanvas, 0, 0);
-            that.tempContext.clearRect(0, 0, that.tempCanvas.width, that.tempCanvas.height);        }
+            that.tempContext.clearRect(0, 0, that.tempCanvas.width, that.tempCanvas.height);
+        }
+
+        this.draw = function (context, x1, y1, x2, y2) {
+            context.beginPath();
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.stroke();
+            context.closePath();
+        }
+
+        this.drawCommand = function (context, command) {
+            this.draw(context, command.x1, command.y1, command.x2, command.y2);
+        }
     }
 
-    app.run(function (AddonService) {
-        AddonService.registerAddon('lineTool', new LineToolAddon());
+    var LineCommand = function (options) {
+        this.toolName = 'lineTool';
+        
+        this.x1 = options.x1;
+        this.y1 = options.y1;
+        this.x2 = options.x2;
+        this.y2 = options.y2;
+    }
+
+    app.run(function (AddonService, CommandService) {
+        AddonService.registerAddon('lineTool', new LineToolAddon(CommandService));
     });
 })();

@@ -1,5 +1,5 @@
 ﻿(function() {
-    angular.module('DrawBox').controller('DrawboardController', function ($scope, AddonService) {
+    angular.module('DrawBox').controller('DrawboardController', function ($scope, AddonService, CommandService) {
         var canvas, tempCanvas = null;
         var mouseBtnPressed = false;
         $scope.drawingTools = {};
@@ -47,6 +47,14 @@
             if (func) {
                 func(ev);
             }
+        }
+
+        $scope.onUndo = function () {
+            CommandService.undo();
+        }
+
+        $scope.onRedo = function () {
+            CommandService.redo();
         }
     });
 })();

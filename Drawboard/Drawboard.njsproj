@@ -47,6 +47,7 @@
     <Compile Include="public\libs\ui-bootstrap.min.js" />
     <Compile Include="public\services\addonService.js" />
     <Compile Include="public\services\authenticationService.js" />
+    <Compile Include="public\services\comandService.js" />
     <Compile Include="public\services\socketService.js" />
     <Compile Include="public\tasks\gulpfile.js" />
     <Compile Include="routes\index.js" />

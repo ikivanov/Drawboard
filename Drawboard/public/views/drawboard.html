@@ -4,7 +4,10 @@
     </div>
 
     <div class="row drawboard-toolbar">
-        <div><br/></div>
+        <div class="toolbar">
+            <button ng-click="onUndo()"><<</button>
+            <button ng-click="onRedo()">>></button>
+        </div>
     </div>
 
     <div class="row drawboard-container">
@@ -41,6 +44,7 @@
 
     .drawboard-toolbar {
         background-color:navy;
+        padding-left:210px;
     }
 
     .drawboard-container {

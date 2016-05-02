@@ -45,5 +45,15 @@
                 return addon.isDefault === true;
             });
         }
+
+        this.getToolByName = function (name) {
+            if (!name) {
+                return null;
+            }
+
+            return addons.find(function (addon) {
+                return addon.name === name;
+            });
+        }
     });
 })();
